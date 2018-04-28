@@ -46,10 +46,15 @@ class Concentration {
     // 初始化方法
     init(numberOfPairsOfCards: Int) {
         // 生成卡片，每两张卡片拥有相同的标识
+        var tempCards = [Card]()
         for _ in 0..<numberOfPairsOfCards {
             let card = Card()
-            cards += [card, card]
+            tempCards += [card, card]
         }
-        // TODO: 洗牌
+        // 洗牌
+        for _ in tempCards.indices {
+            let randomIndex = Int(arc4random_uniform(UInt32(tempCards.count)))
+            cards.append(tempCards.remove(at: randomIndex))
+        }
     }
 }
