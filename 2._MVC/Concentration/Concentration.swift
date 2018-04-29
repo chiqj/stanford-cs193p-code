@@ -45,6 +45,9 @@ class Concentration {
     
     // 初始化方法
     init(numberOfPairsOfCards: Int) {
+        // 避免每次重新开始游戏的时候，identifierFactory值不断增长
+        // TODO: 不知道放在这里合不合适
+        Card.identifierFactory = 0
         // 生成卡片，每两张卡片拥有相同的标识
         var tempCards = [Card]()
         for _ in 0..<numberOfPairsOfCards {

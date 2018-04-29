@@ -18,6 +18,15 @@ class ViewController: UIViewController {
         }
     }
     
+    // 点击重启开始游戏按钮会执行这个方法
+    @IBAction func RestartGameBtn(_ sender: UIButton) {
+        game = Concentration(numberOfPairsOfCards: (cardButtons.count+1) / 2)
+        emoji = [Int: String]()
+        emojiChoices = ["🍉", "🥕", "🍓", "🥝", "🥥", "🍒", "🍌", "🍑"]
+        flipCount = 0
+        updateViewFromModel()
+        print(Card.identifierFactory)
+    }
     
     // 显示翻牌次数的label
     @IBOutlet weak var flipCountLabel: UILabel!
@@ -60,8 +69,11 @@ class ViewController: UIViewController {
     // emoji表情数组
     var emojiChoices = ["🍉", "🥕", "🍓", "🥝", "🥥", "🍒", "🍌", "🍑"]
     
+    // 用来根据卡片 identifier 获取 emoji 表情的字典
+    // TODO: 和方法同名，真的不要紧么？
     var emoji = [Int: String]()
 
+    // 获取卡片上应该展示的 emoji 表情
     func emoji(for card: Card) -> String {
         // 如果 emoji 字典中没有这个 key，且 emojiChoices 中还有值
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
